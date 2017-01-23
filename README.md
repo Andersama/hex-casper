@@ -19,19 +19,22 @@ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FO
 Tags control the background color as well as orientation of posts (left / right), by default posts alternate even and odd between the two.
 
 Color tags are:
-	*red
-	*orange
-	*yellow
-	*green
-	*blue
-	*purple
-	*pink
-	*black
-	*white
-	*(gray/grey)
+
+- red
+- orange
+- yellow
+- green
+- blue
+- purple
+- pink
+- black
+- white
+- (gray/grey)
+
 Orientation tags are:
-	*anchor_left
-	*anchor_right
+
+- anchor_left
+- anchor_right
 
 By default 
 ```css
