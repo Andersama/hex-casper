@@ -1,0 +1,52 @@
+{{! Previous/next page links - only displayed on page 2+ }}
+<div class="extra-pagination inner">
+    {{pagination}}
+</div>
+
+{{#if prev}}
+{{else}}
+	{{#get "posts" filter="featured:true" limit="all" include="tags,author" as |featured|}}
+		{{> "featured" pickedPosts=featured}}
+	{{/get}}
+{{/if}}
+
+{{! This is the post loop - each post will be output using this markup }}
+{{#foreach posts}}
+	{{^if featured}}
+	
+	<div style="width:100%" class="{{#link}}main-link-post{{/link}} {{#if @even}}main-post-even{{else}}main-post-odd{{/if}} main-post-{{@number}} {{#has tag="main-post-contain-image,image_contain,img_contain"}}main-post-contain-image{{/has}} {{#has tag="anchor_right"}}main-post-image-anchor-right{{/has}}{{#has tag="anchor_left"}}main-post-image-anchor-left{{/has}} {{#has tag="red,orange,yellow,green,blue,purple,pink,black,gray,grey,white"}}main-post-{{/has}}{{#has tag="red"}}red{{/has}}{{#has tag="orange"}}orange{{/has}}{{#has tag="yellow"}}yellow{{/has}}{{#has tag="green"}}green{{/has}}{{#has tag="blue"}}blue{{/has}}{{#has tag="purple"}}purple{{/has}}{{#has tag="pink"}}pink{{/has}}{{#has tag="black"}}black{{/has}}{{#has tag="gray,grey"}}gray{{/has}}{{#has tag="white"}}white{{/has}}">
+		{{#if image}}<a href="{{#link}}{{theLink}}{{else}}{{url}}{{/link}}" alt="{{title}}"><img src="{{image}}"></img></a>{{/if}}
+		{{#has tag="image_only"}}
+		
+		{{else}}
+		<article class="{{post_class}} {{#has tag="text_appear_25"}}main-text-appear-25{{/has}} {{#has tag="text_appear_25"}}main-text-appear-50{{/has}} {{#has tag="text_appear_75"}}main-text-appear-25{{/has}}" style="min-height: 20vh;">
+			{{#has tag="text_excerpt"}}
+			{{else}}
+			<header class="post-header">
+				<h2 class="post-title"><a href="{{url}}">{{{title}}}</a></h2>
+			</header>
+			{{/has}}
+			<section class="post-excerpt">
+				<p>{{excerpt words="26"}} <a class="read-more" href="{{url}}">&raquo;</a></p>
+			</section>
+			{{#has tag="meta_hidden,text_excerpt,text_appear_25,text_appear_50,text_appear_75"}}
+			{{else}}
+			<footer class="post-meta">
+				{{#if author.image}}<img class="author-thumb" src="{{author.image}}" alt="{{author.name}}" nopin="nopin" />{{/if}}
+				{{author}}
+				{{#has tag="red,orange,yellow,green,blue,purple,pink,black,gray,grey,white,img_contain,image_contain,hide_tags"}}
+				{{else}}
+					{{tags prefix=" on "}}
+				{{/has}}
+				<time class="post-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="DD MMMM YYYY"}}</time>
+			</footer>
+			{{/has}}
+		</article>
+		{{/has}}
+	</div>
+	
+	{{/if}}
+{{/foreach}}
+
+{{! Previous/next page links - displayed on every page }}
+{{pagination}}
